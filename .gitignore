@@ -1,0 +1,5 @@
+media/*
+trash/migrations/*
+trash/__pycache__/*
+trash_dev/__pycache__/*
+.vscode/*
