@@ -7,7 +7,7 @@ def get_timestamp():
      return str(int(datetime.now().timestamp()*100))
 
 def get_image_timestamped_path(instance, filename):
-     return 'uploads/user_{0}/Img_{1}.jpg'.format(instance.user.id, get_timestamp())
+     return 'uploads/user_{0}/Img_{1}.jpg'.format(instance.author.id, get_timestamp())
 
 class UserManager(BaseUserManager):
 
@@ -53,6 +53,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 class Post(models.Model):
      text = models.CharField( max_length = 200 ) 
      latitude = models.DecimalField( max_digits = 12, decimal_places = 10 )
+     address= models.CharField( max_length = 200 )
      longitude = models.DecimalField( max_digits = 12, decimal_places = 10 )
      created = models.DateTimeField( editable = False, auto_now_add = True)
      modified = models.DateTimeField( editable = False, null = True , auto_now=True)

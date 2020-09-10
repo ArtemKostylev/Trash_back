@@ -27,7 +27,7 @@ SECRET_KEY = '33xi$q!7y#i*6l6a-@3^!!qwdfmckm$t9j1mem24suphk-^y$$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', '192.168.0.184']
+ALLOWED_HOSTS = ['0.0.0.0', '192.168.5.19', '127.0.0.1', '192.168.42.233', '192.168.3.7']
 
 AUTH_USER_MODEL = 'trash.User'
 
@@ -48,6 +48,9 @@ INSTALLED_APPS = [
 ]
 
 REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
     'DEFAULT_AUTHENTICATION_CLASSES':[
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
     ],
@@ -98,9 +101,9 @@ JWT_AUTH = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'trash_dev',
-        'USER': 'shkriadmin',
-        'PASSWORD': 'derek123',
+        'NAME': 'dev_db',
+        'USER': 'dev_user',
+        'PASSWORD': '12345678',
         'HOST': 'localhost',
         'PORT': ''
     }

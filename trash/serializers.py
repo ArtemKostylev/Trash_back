@@ -4,7 +4,7 @@ from trash.models import Post, User, Comment
 class PostSerializer(serializers.ModelSerializer):
     class Meta: 
         model = Post
-        fields = ['id', 'text', 'latitude', 'longitude', 'created', 'modified', 'image', 'author']
+        fields = ['id', 'text', 'latitude', 'longitude', 'created', 'modified', 'image', 'author', 'address']
 
 class UserSerializer(serializers.ModelSerializer):
     date_joined = serializers.ReadOnlyField()

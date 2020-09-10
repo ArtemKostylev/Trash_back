@@ -96,8 +96,8 @@ def create_user(request):
     token = jwt_encode_handler(payload)
 
     res = {}
-    res['first_name'] = request.data['first_name']
-    res['last_name'] = request.data['last_name']
+    serializer = UserSerializer(user)
+    res['user'] = serializer.data
     res['token'] = token
 
     return Response(res, status = status.HTTP_201_CREATED)
@@ -116,7 +116,7 @@ def user_authenticated_api(request):
     pk = request.GET.get('pk', '')
     if pk: 
         try: 
-            user = User.objects.get(id = pk)
+            user = User.objects.get(phone_number = pk)
         except User.DoesNotExist:
             return Response(status = status.HTTP_204_NO_CONTENT)
         
@@ -129,10 +129,10 @@ def user_authenticated_api(request):
             return Response(status = status.HTTP_204_NO_CONTENT)
                     
     elif request.method == 'PUT':
-        data = request.data
-        pk = data['id']
+        data = JSONParser().parse(request)
+        pk = data['phone_number']
         try: 
-            user = User.objects.get(id = pk)
+            user = User.objects.get(phone_number = pk)
         except User.DoesNotExist:
             return Response(status = status.HTTP_204_NO_CONTENT)
         serializer = UserSerializer(user, data = data)
